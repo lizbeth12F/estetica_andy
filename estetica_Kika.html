@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estetica kika | estetica</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    
+    :root{
+      --bg: #0a0a0c;
+      --card: #151517;
+      --accent: #e63946;
+      --accent-2: #ffd166;
+      --text: #f5f5f5;
+      --muted: #b0b0b0;
+      --gradient: linear-gradient(135deg, #e63946 0%, #ff6b81 100%);
+      --border: rgba(230,57,70,0.2);
+    }
+
+    * {box-sizing: border-box; margin: 0; padding: 0;}
+    html {scroll-behavior: smooth;}
+
+    body {
+      font-family: 'Segoe UI', Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+ .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+ .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      background: rgba(10,10,12,0.85);
+      backdrop-filter: blur(12px);
+      padding: 18px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+
+.brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+.logo {
+      font-size: 38px;
+      font-weight: 900;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+.tag {
+      font-size: 11px;
+      color: #fff;
+      background: rgba(230,57,70,0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+    }
+
+    nav {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::after {width: 80%;}
+
+.hero {
+      text-align: center;
+      padding: 100px 20px 80px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(230,57,70,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,209,102,0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0a0c 0%, #121214 100%);
+    }
+
+.hero h1 {
+      font-size: clamp(42px, 6vw, 64px);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      background: linear-gradient(90deg, #fff 0%, #ffd9d9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+.hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 28px;
+    }
+
+.cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--gradient);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(230,57,70,0.4);
+      transition: all 0.3s ease;
+    }
+
+.cta:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 32px rgba(230,57,70,0.6);
+    }
+
+.sections {padding: 60px 16px;}
+
+.services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+.card {
+      background: rgba(21,21,23,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.4s ease;
+    }
+
+.card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(230,57,70,0.25);
+    }
+
+.card h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--accent-2);
+    }
+
+.card p {color: var(--muted); font-size: 15px;}
+
+.slogan {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 50px 0;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+  /* SECCIÓN PRECIOS CON FOTO */
+.precios-horarios {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 16px;
+  }
+
+.precios-horarios h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+
+.precios-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: start;
+  }
+
+.tabla-precios {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(21,21,23,0.9);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+.tabla-precios thead {
+      background: var(--gradient);
+  }
+
+.tabla-precios th {
+      padding: 18px 12px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+  }
+
+.tabla-precios td {
+      padding: 16px 12px;
+      border-bottom: 1px solid rgba(230,57,70,0.1);
+      color: var(--text);
+      font-size: 15px;
+      vertical-align: middle;
+  }
+
+.tabla-precios tbody tr {
+      transition: all 0.3s ease;
+  }
+
+.tabla-precios tbody tr:hover {
+      background: rgba(230,57,70,0.06);
+  }
+
+.tabla-precios tbody tr:last-child td {
+      border-bottom: none;
+  }
+
+.tabla-precios.precio {
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 18px;
+      white-space: nowrap;
+  }
+
+.tabla-precios.categoria {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 2px;
+  }
+
+.tabla-precios.dia {
+      font-weight: 600;
+  }
+
+.tabla-precios.horario {
+      color: var(--muted);
+      font-size: 14px;
+  }
+
+.tabla-precios.img-corte {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+  }
+
+.badge-nuevo {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      font-weight: 700;
+      vertical-align: middle;
+  }
+
+.foto-corte {
+      background: rgba(21,21,23,0.6);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+.foto-corte h3 {
+      text-align: center;
+      color: var(--accent-2);
+      margin-bottom: 16px;
+      font-size: 20px;
+  }
+
+.foto-corte img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid rgba(230,57,70,0.3);
+  }
+
+.foto-corte.etiqueta {
+      text-align: center;
+      margin-top: 12px;
+      padding: 10px;
+      background: rgba(230,57,70,0.15);
+      border-radius: 10px;
+      font-weight: 600;
+      color: var(--accent);
+  }
+
+.quienes-somos{
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 50px 40px;
+      background: linear-gradient(145deg, rgba(21,21,23,0.8), rgba(30,30,32,0.8));
+      border-radius: 24px;
+      border: 1px solid rgba(230,57,70,0.15);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+.quienes-somos h2{
+      text-align: center;
+      font-size: 38px;
+      margin-bottom: 12px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+.subtitulo{
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+.quienes-somos p{
+      text-align: justify;
+      line-height: 1.9;
+      font-size: 16px;
+      color: #e0e0e0;
+      margin-bottom: 16px;
+    }
+
+.mision-vision{
+      display: flex;
+      gap: 25px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+.card-para{
+      flex: 1;
+      min-width: 300px;
+      padding: 28px;
+      border-radius: 16px;
+      background: rgba(10,10,12,0.6);
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+.card-para:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(230,57,70,0.3);
+      border-left-color: var(--accent-2);
+    }
+
+.card-para h3{
+      color: var(--accent-2);
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+.galeria {padding: 60px 16px;}
+
+.galeria h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+.carousel {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 2px solid rgba(230,57,70,0.3);
+    }
+
+.carousel img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: none;
+    }
+
+.carousel img.active {display: block;}
+
+.nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      padding: 12px 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+.nav:hover {background: var(--accent);}
+
+.prev {left: 16px;}
+.next {right: 16px;}
+
+.caption {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+.antes-despues {
+      padding: 80px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+.antes-despues h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+.comparison {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+.comparison img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+.img-before {z-index: 1;}
+.img-after {
+      z-index: 2;
+      clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      transition: clip-path 0.1s;
+    }
+
+.slider {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      cursor: ew-resize;
+      transform: translateX(-50%);
+    }
+
+.slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(230,57,70,0.5);
+    }
+
+.label {
+      position: absolute;
+      top: 20px;
+      padding: 8px 16px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      font-weight: 700;
+      z-index: 4;
+    }
+
+.label-before {left: 20px; color: var(--muted);}
+.label-after {right: 20px; color: var(--accent-2);}
+
+    footer {
+      background: #050505;
+      color: var(--muted);
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+    }
+
+.redes-sociales {
+      margin-bottom: 20px;
+    }
+
+.redes-sociales a {
+      margin: 0 12px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+.redes-sociales i {
+      font-size: 2.2rem;
+      color: var(--muted);
+      transition: all 0.3s ease;
+    }
+
+.redes-sociales a:hover {
+      transform: translateY(-5px) scale(1.2);
+    }
+
+.redes-sociales a:hover i {
+      color: var(--accent);
+    }
+
+.social-float {
+      position: fixed;
+      width: 55px;
+      height: 55px;
+      right: 20px;
+      background-color: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 28px;
+      box-shadow: 2px 2px 5px #999;
+      z-index: 100;
+      transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+.whatsapp-float {
+      bottom: 20px;
+      background-color: #25D366;
+    }
+
+.facebook-float {
+      bottom: 85px;
+      background-color: #1877F2;
+    }
+
+.instagram-float {
+      bottom: 150px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%,
+                #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+
+.social-float:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 968px) {
+  .precios-container {
+        grid-template-columns: 1fr;
+   }
+  .foto-corte {
+        position: relative;
+        top: 0;
+   }
+    }
+
+    @media (max-width: 768px) {
+ .logo {font-size: 28px;}
+ .hero h1 {font-size: 42px;}
+ .quienes-somos {padding: 30px 20px;}
+ .comparison {height: 350px;}
+ .social-float {width: 50px; height: 50px; font-size: 24px; right: 20px;}
+ .whatsapp-float {bottom: 20px;}
+ .facebook-float {bottom: 80px;}
+ .instagram-float {bottom: 140px;}
+ .tabla-precios th,.tabla-precios td {padding: 12px 8px; font-size: 13px;}
+ .tabla-precios.precio {font-size: 16px;}
+ .tabla-precios.img-corte {width: 60px; height: 60px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">✂ Barber Andy ✂</div>
+      <span class="tag">Premium</span>
+    </div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#precios">Precios</a>
+      <a href="#antes-despues">Resultados</a>
+      <a href="#galeria">Galería</a>
+      <a href="#quienes-somos">Quiénes Somos</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#ubicacion">ubicacion</a>
+    </nav>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <h1>"Donde el estilo se convierte en arte"</h1>
+    <p>Cortes únicos, afeitados precisos y un ambiente donde el estilo clásico se encuentra con la creatividad moderna.</p>
+    <a href="#servicios" class="cta"><i class="fas fa-scissors"></i> VER SERVICIOS</a>
+  </section>
+
+  <section class="sections reveal" id="servicios">
+    <div class="services">
+      <div class="card">
+        <h2><i class="fas fa-cut"></i> Cortes Clásicos</h2>
+        <p>Estilo tradicional con un toque moderno y precisión milimétrica.</p>
+      </div>
+      <div class="card">
+        <h2><i class="fas fa-spa"></i> Afeitados Premium</h2>
+        <p>Con toallas calientes, aceites y productos de barbería profesional.</p>
+      </div>
+      <div class="card">
+        <h2><i class="fas fa-paint-brush"></i> Diseños Creativos</h2>
+        <p>Líneas, fades y estilos personalizados a tu personalidad.</p>
+      </div>
+      <div class="card">
+        <h2><i class="fas fa-magic"></i> Color y Estilo</h2>
+        <p>Aplicación de tintes y técnicas modernas de coloración.</p>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLA DE PRECIOS Y HORARIOS CON IMAGEN POR CORTE -->
+  <section class="precios-horarios reveal" id="precios">
+    <h2>Servicios y Horarios</h2>
+    <div class="precios-container">
+      <table class="tabla-precios">
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Duración</th>
+            <th>Imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="categoria">Corte</span>
+              <span class="dia">Clásico</span>
+            </td>
+            <td>Tijera y máquina, acabado tradicional</td>
+            <td class="precio">$150</td>
+            <td class="horario">30 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Documents\corte clasico 1.png" alt="Corte Clásico" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Corte</span>
+              <span class="dia">Fade / Desvanecido</span>
+              <span class="badge-nuevo">POPULAR</span>
+            </td>
+            <td>Skin fade, mid fade, high fade con diseño</td>
+            <td class="precio">$180</td>
+            <td class="horario">40 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Documents\corte fade moderno 1.png" alt="Corte Fade" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Barba</span>
+              <span class="dia">Afeitado Premium</span>
+            </td>
+            <td>Toalla caliente, aceite, navaja y bálsamo</td>
+            <td class="precio">$120</td>
+            <td class="horario">25 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Downloads\descarga.jpg" alt="Afeitado Premium" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Combo</span>
+              <span class="dia">Corte + Barba</span>
+            </td>
+            <td>Servicio completo con acabado de lujo</td>
+            <td class="precio">$280</td>
+            <td class="horario">60 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Documents\images fade 2.png" alt="Combo Corte + Barba" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Diseño</span>
+              <span class="dia">Grecas / Líneas</span>
+            </td>
+            <td>Diseños personalizados en corte</td>
+            <td class="precio">$200</td>
+            <td class="horario">45 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Documents\diceño creativo 1.png" alt="Diseño Creativo" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Color</span>
+              <span class="dia">Tinte / Mechas</span>
+            </td>
+            <td>Aplicación profesional + matizado</td>
+            <td class="precio">$350</td>
+            <td class="horario">90 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Documents\tinte.png" class="img-corte"></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="categoria">Niños</span>
+              <span class="dia">Corte Infantil</span>
+            </td>
+            <td>Menores de 12 años, corte clásico</td>
+            <td class="precio">$120</td>
+            <td class="horario">25 min</td>
+            <td><img src="c:\Users\LIZBETH 409\Downloads\images.jpg" class="img-corte"></td>
+          </tr>
+          <tr style="background: rgba(255,209,102,0.05);">
+            <td colspan="2">
+              <span class="categoria">Horarios</span>
+              <span class="dia">Lunes a Sábado</span>
+            </td>
+            <td colspan="3" class="horario" style="text-align: center; font-weight: 600; color: var(--accent-2);">
+              10:00 AM - 8:00 PM
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="slogan reveal">💈 Tu estilo, nuestra pasión 💈</p>
+
+  <!-- ANTES Y DESPUÉS -->
+  <section class="antes-despues reveal" id="antes-despues">
+    <h2>Resultados Reales</h2>
+    <div class="comparison" id="comparison">
+      <img src="c:\Users\LIZBETH 409\Downloads\hq720.jpg" alt="Antes" class="img-before">
+      <img src="c:\Users\LIZBETH 409\Downloads\hq720.jpg" alt="Después" class="img-after">
+      <div class="slider" id="slider">
+        <div class="slider-handle"><i class="fas fa-arrows-left-right"></i></div>
+      </div>
+      <div class="label label-before">ANTES</div>
+      <div class="label label-after">DESPUÉS</div>
+    </div>
+  </section>
+
+  <section id="quienes-somos" class="quienes-somos reveal">
+    <h2>Quiénes Somos</h2>
+    <p class="subtitulo">Más que una barbería, una experiencia</p>
+    <p>Somos un centro de estética dedicado al cuidado integral de tu imagen, tu salud y tu bienestar. Nacimos con la ilusión de crear un espacio único, donde la belleza se vive como una experiencia placentera y transformadora.</p>
+    <p>Cada persona es única, por eso escuchamos, asesoramos y diseñamos planes personalizados adaptados a tus necesidades y deseos. Tu confianza y tu satisfacción son lo más importante.</p>
+
+    <div class="mision-vision">
+      <div class="card-para">
+        <h3>✨ Misión</h3>
+        <p>Ofrecer servicios integrales de estética y cuidado personal de la más alta calidad, combinando técnicas innovadoras, productos de excelencia y un trato humano cálido y personalizado.</p>
+      </div>
+      <div class="card-para">
+        <h3>🌟 Visión</h3>
+        <p>Ser el centro de estética de referencia en nuestra comunidad, reconocido por la excelencia en nuestros servicios, la innovación constante y el compromiso con tu bienestar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" class="galeria reveal">
+    <h2>Galería de Estilos</h2>
+    <div class="carousel">
+      <img src="c:\Users\LIZBETH 409\Downloads\corte clasico 1.jpg" class="active" alt="Corte clásico">
+      <img src="c:\Users\LIZBETH 409\Downloads\cortes clasicos 2.webp" alt="Corte clásico 2">
+      <img src="c:\Users\LIZBETH 409\Downloads\corte fade moderno 1.png" alt="Fade moderno">
+      <img src="c:\Users\LIZBETH 409\Documents\PRACTICA\codigos\cortes fade modernos 2.jpg" alt="Fade moderno 2">
+      <img src="c:\Users\LIZBETH 409\Downloads\diceño creativo 1.jpg" alt="Diseño creativo">
+      <img src="c:\Users\LIZBETH 409\Downloads\diceño creativo 2.webp" alt="Diseño creativo 2">
+      <button class="nav prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="nav next"><i class="fas fa-chevron-right"></i></button>
+      <div class="caption" id="carousel-caption">Corte Clásico</div>
+    </div>
+  </section>
+  <section id="ubicacion">
+    <h2>Ubicación</h2>
+    <p>San Jose Octeyuco.</p>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3750.466077837568!2d-99.61100362395614!3d19.946892181445378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2494414c99793%3A0xdbea954ab7672d6d!2sSan%20Jos%C3%A9%20Octeyuco!5e0!3m2!1sen!2smx!4v1781308852801!5m2!1sen!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+  <footer id="contacto">
+    <div class="redes-sociales">
+      <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>📍 Jilotepec de Molina Enríquez, México</p>
+    <p>📞 Tel: 555-123-456</p>
+    <p>🕒 Lun - Sáb: 10:00 AM a 8:00 PM</p>
+    <p>© 2026 Barber Andy - Todos los derechos reservados</p>
+  </footer>
+
+
+  <a href="https://wa.me/525512345678" target="_blank" class="social-float whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/TuPagina" target="_blank" class="social-float facebook-float">
+    <i class="fab fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/TuCuenta" target="_blank" class="social-float instagram-float">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <script>
+    // Carrusel
+    const slides = [
+      {caption: 'Corte Clásico'},
+      {caption: 'Corte Clásico'},
+      {caption: 'Fade Moderno'},
+      {caption: 'Fade Moderno'},
+      {caption: 'Diseño Creativo'},
+      {caption: 'Diseño Creativo'}
+    ];
+
+    let idx = 0;
+    const imgs = document.querySelectorAll('.carousel img');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    const caption = document.getElementById('carousel-caption');
+
+    function show(i){
+      imgs.forEach(img => img.classList.remove('active'));
+      imgs[i].classList.add('active');
+      caption.textContent = slides[i].caption;
+    }
+
+    prev.addEventListener('click', () => {
+      idx = (idx - 1 + slides.length) % slides.length;
+      show(idx);
+    });
+
+    next.addEventListener('click', () => {
+      idx = (idx + 1) % slides.length;
+      show(idx);
+    });
+
+    setInterval(() => {
+      idx = (idx + 1) % slides.length;
+      show(idx);
+    }, 4000);
+
+    // Slider Antes/Después
+    const comparison = document.getElementById('comparison');
+    const imgAfter = document.querySelector('.img-after');
+    const slider = document.getElementById('slider');
+    let isDragging = false;
+
+    function updateSlider(x) {
+      const rect = comparison.getBoundingClientRect();
+      let percentage = ((x - rect.left) / rect.width) * 100;
+      percentage = Math.max(0, Math.min(100, percentage));
+      imgAfter.style.clipPath = `polygon(${percentage}% 0, 100% 0, 100% 100%, ${percentage}% 100%)`;
+      slider.style.left = percentage + '%';
+    }
+
+    slider.addEventListener('mousedown', () => isDragging = true);
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) updateSlider(e.clientX);
+    });
+
+    slider.addEventListener('touchstart', () => isDragging = true);
+    window.addEventListener('touchend', () => isDragging = false);
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) updateSlider(e.touches[0].clientX);
+    });
+
+    // Animación reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {threshold: 0.1});
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+</html>
